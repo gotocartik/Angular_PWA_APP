@@ -1,0 +1,122 @@
+<nav class="navbar navbar-dark bg-info navbar-flat flat" style="box-shadow: none;text-align: center">
+  <a class="navbar-brand" href="#"> <img src="https://image.flaticon.com/icons/png/512/21/21601.png" width="40px">
+    Pwa News Feed
+  </a>
+  <p style="float:right" class="btn btn-outline text-white" (click)="fetchNews()">Refresh</p>
+</nav>
+
+
+<div class="modal fade show active" *ngIf="Pwa.promptEvent" style="display:block" (click)="installPwa()"
+  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add to Homescreen</h5>
+      </div>
+      <div class="modal-body">
+        <a class="navbar-brand" href="#"> <img src="https://image.flaticon.com/icons/png/512/21/21601.png" width="40px">
+          Pwa News Feed
+        </a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-outline" (click)="installPwa()">Add to Homescreen</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <nav class="">
+    <div class="bg-info navbar-dark nav-tabs nav nav-pills nav-fill" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" style="color:white!important" id="nav-home-tab" data-toggle="tab"
+        href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">business</a>
+      <a class="nav-item nav-link  " style="color:white!important" id="nav-profile-tab" data-toggle="tab"
+        href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">TechCrunch</a>
+      <a class="nav-item nav-link " style="color:white!important" id="nav-contact-tab" data-toggle="tab"
+        href="#nav-contact1" role="tab" aria-controls="nav-contact" aria-selected="false">Journal</a>
+      <!-- <a class="nav-item nav-link " style="color:white!important" id="nav-contact-tab" data-toggle="tab"
+        href="#nav-contact2" role="tab" aria-controls="nav-contact" aria-selected="false">India</a> -->
+
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent" style="margin:10px" *ngIf="loaded">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <h4>Business</h4>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let news of business">
+          <div class="card">
+            <img class="card-img-top"
+              src="{{news.urlToImage?news.urlToImage:'https://media4.s-nbcnews.com/j/newscms/2019_01/2705191/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.nbcnews-fp-1200-630.png'}}"
+              alt="{{news.title}}">
+            <div class="card-body">
+              <h5 class="card-title" style="color:blue">{{news.title}}</h5>
+              <p class=" card-text">{{news.description}}</p>
+              <a href="{{news.url}}" target="_blank" class="btn btn-info">read More</a>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <h4>TechCrunch</h4>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let news of tech">
+          <div class="card">
+            <img class="card-img-top"
+              src="{{news.urlToImage?news.urlToImage:'https://media4.s-nbcnews.com/j/newscms/2019_01/2705191/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.nbcnews-fp-1200-630.png'}}"
+              alt="{{news.title}}">
+            <div class="card-body">
+              <h5 class="card-title" style="color:blue">{{news.title}}</h5>
+              <p class=" card-text">{{news.description}}</p>
+              <a href="{{news.url}}" target="_blank" class="btn btn-info">read More</a>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-contact1" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <h4>The Wall Street Journal</h4>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let news of journal">
+          <div class="card">
+            <img class="card-img-top"
+              src="{{news.urlToImage?news.urlToImage:'https://media4.s-nbcnews.com/j/newscms/2019_01/2705191/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.nbcnews-fp-1200-630.png'}}"
+              alt="{{news.title}}">
+            <div class="card-body">
+              <h5 class="card-title" style="color:blue">{{news.title}}</h5>
+              <p class=" card-text">{{news.description}}</p>
+              <a href="{{news.url}}" target="_blank" class="btn btn-info">read More</a>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="nav-contact2" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <h4>India</h4>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let news of india">
+          <div class="card">
+            <img class="card-img-top"
+              src="{{news.urlToImage?news.urlToImage:'https://media4.s-nbcnews.com/j/newscms/2019_01/2705191/nbc-social-default_b6fa4fef0d31ca7e8bc7ff6d117ca9f4.nbcnews-fp-1200-630.png'}}"
+              alt="{{news.title}}">
+            <div class="card-body">
+              <h5 class="card-title" style="color:blue">{{news.title}}</h5>
+              <p class=" card-text">{{news.description}}</p>
+              <a href="{{news.url}}" target="_blank" class="btn btn-info">read More</a>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align: center" *ngIf="!loaded">
+    <br><br>
+    <img src="https://orig00.deviantart.net/df77/f/2013/094/8/d/loading_logofinal_by_zegerdon-d60eb1v.gif"
+      width="100px">
+  </div>
+</div>
